@@ -7,7 +7,7 @@ begin
     gem.name = "prowly"
     gem.summary = %Q{TODO: one-line summary of your gem}
     gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "rafael.magana@crowdint.com"
+    gem.email = "raf.magana@gmail.com"
     gem.homepage = "http://github.com/rafmagana/prowly"
     gem.authors = ["Rafael Magaña"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"

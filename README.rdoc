@@ -1,6 +1,47 @@
 = prowly
 
-Description goes here.
+Yet another Ruby interface to Prowl
+
+== Usage
+	
+	Prowly.notify do |n| # :notify is an alias of :add
+	  n.apikey = "apikey" or n.apikeys = ["apikey_1", "apikey_2", "apikey_n"]
+	  n.priority = Prowly::Notification::Priority::MODERATE
+	  n.application = "Prowly"
+	  n.event = "Notification"
+	  n.description = "Your server is under attack!!!"
+	end
+	
+	notification = Prowly::Notification.new(:apikey => "apikey", :application => "Prowly", :description => "Testing...")
+	notification = Prowly::Notification.new(:apikeys => ["apikey_1", "apikey_2", "apikey_n"], :application => "Prowly", :description => "Testing...")
+	
+	result = Prowly.notify(notification)
+
+== Handling the Prowl API response
+	
+	ON SUCCESS
+	result.status # => "success"
+	result.code # => "200"
+
+	if result.succeeded?
+	  result.remaining # => "977"
+	  resetdate.resetdate # => "1266272588"
+	else
+	  resetdate.message # => 
+	end
+	
+	ON ERROR
+	result.status # => "error"
+	result.code # => "401" <= This depends on the error code sent by the prowl API
+
+	if result.succeeded?
+	  result.remaining # =>
+	  resetdate.resetdate # =>
+	else
+	  resetdate.message # => "Invalid API Key(s)" <= This depends on the message sent by the prowl API
+	end
+	
+
 
 == Note on Patches/Pull Requests
  
