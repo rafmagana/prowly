@@ -2,6 +2,10 @@
 
 Yet another Ruby interface to Prowl
 
+== Installation
+	
+	gem install prowly
+
 == Usage
 	
 	Prowly.notify do |n| # :notify is an alias of :add
