@@ -25,6 +25,10 @@ module Prowly
     result.message
   end
   
+  def version
+    File.read(File.join(File.dirname(__FILE__), *%w[.. VERSION]))
+  end
+  
   private
   def api
     Interface.instance

@@ -1,0 +1,94 @@
+#!/usr/bin/env ruby
+
+STDOUT.sync = true
+
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+require 'rubygems'
+require 'prowly'
+require 'optparse'
+
+ORIGINAL_ARGV = ARGV.dup
+
+#the defaults
+options = {
+            :description => "I am testing Prowly, and it works!", 
+            :event => "Prowly notification", 
+            :application => "Prowly", 
+            :priority => Prowly::Notification::Priority::NORMAL}
+
+
+opts = OptionParser.new do |opts|
+  opts.banner = <<-EOF
+Usage:
+    prowly -k onekey -e "the event"
+    prowly -k apikey_1,apikey_2,apikey_n -e "the event"
+        
+  Options:
+EOF
+
+  opts.on("-cCOMMAND", "--api-command COMMAND", "API Command, notify or verify so far") do |command|
+    options[:command] = command
+  end
+
+  opts.on("-kAPIKEY", "--api-key APIKEY", "Prowl API Key") do |apikey|
+    options[:apikey] = apikey
+  end
+  
+  opts.on("-dDESCRIPTION", "--description DESCRIPTION", "Description") do |desc|
+    options[:description] = desc
+  end
+  
+  opts.on("-eEVENT", "--event EVENT", "Event") do |event|
+    options[:event] = event
+  end
+  
+  opts.on("-pPRIORITY", "--priority PRIORITY", "VERY_LOW, MODERATE, NORMAL (default), HIGH, EMERGENCY") do |priority|
+    options[:priority] = priority
+  end
+  
+  opts.on("-v", "--version", "Print the version number and exit") do
+    options[:version] = true
+  end  
+end
+
+opts.parse!
+
+if options[:version]
+  abort("Version " + Prowly.version)
+end
+
+# validate
+unless options[:command]
+  options[:command] == "notify"
+end
+
+unless options[:apikey]
+  abort("You must specify an API Key")
+end
+
+if options[:apikey].size < 40
+  abort("Each API key must be a 40-byte hexadecimal string")
+else
+  options[:apikey] = options[:apikey].split(",") if options[:apikey].include? ","
+end
+
+available_priorities = Prowly::Notification::Priority.constants
+unless available_priorities.include? options[:priority]
+  abort("Invalid priority. Valid options are: " + available_priorities.join(", "))
+end
+
+result = Prowly.notify do |n|
+  n.apikey      = options[:apikey]
+  n.priority    = options[:priority]
+  n.application = options[:application]
+  n.event       = options[:event]
+  n.description = options[:description]
+end
+
+if result.succeeded?
+  exit 1
+else
+  puts result.message
+  exit 0
+end

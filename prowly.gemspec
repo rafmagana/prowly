@@ -10,8 +10,10 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rafael Maga\303\261a"]
   s.date = %q{2010-02-15}
+  s.default_executable = %q{prowly}
   s.description = %q{The Prowly gem is a simple wrapper to the Prowl API, you can use it to send messages to your iPhone in a Rails or pure Ruby application.}
   s.email = %q{raf.magana@gmail.com}
+  s.executables = ["prowly"]
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
@@ -27,6 +29,7 @@ Gem::Specification.new do |s|
      "lib/prowly/interface.rb",
      "lib/prowly/notification.rb",
      "lib/prowly/response.rb",
+     "prowly.gemspec",
      "test/helper.rb",
      "test/test_prowly.rb"
   ]
