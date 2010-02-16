@@ -1,12 +1,12 @@
 = prowly
 
-Yet another Ruby interface to Prowl
+Yet another Ruby interface to Prowl with command line utility
 
 == Installation
 	
 	gem install prowly
 
-== Usage
+== Usage as a Gem
 	
 	Prowly.notify do |n| # :notify is an alias of :add
 	  n.apikey = "apikey" or n.apikeys = ["apikey_1", "apikey_2", "apikey_n"]
@@ -21,6 +21,27 @@ Yet another Ruby interface to Prowl
 	
 	result = Prowly.notify(notification)
 
+== Usage in the command line
+	
+	$prowly -h # help
+		
+	$prowly -k one_apikey -a "the application" -e "the event" -d "the description" -p NORMAL
+	$prowly -k key_1,key_2,key_n -a "the application" -e "the event"
+	
+	Options:
+	  -k, --api-key APIKEY             Prowl API Key
+	  -d, --description DESCRIPTION    Description
+	  -e, --event EVENT                Event
+	  -p, --priority PRIORITY          VERY_LOW, MODERATE, NORMAL (default), HIGH, EMERGENCY
+	  -v, --version                    Print the version number and exit
+	
+	  If you only specify the apikey prowly will use the defaults: 
+      
+	  :description => "I am testing Prowly, and it works!"
+	  :event => "Prowly notification"
+	  :application => "Prowly"
+	  :priority => NORMAL
+		
 == Handling the Prowl API response
 	
 	ON SUCCESS
