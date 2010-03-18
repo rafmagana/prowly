@@ -28,8 +28,7 @@ module Prowly
       if params[:apikeys] and params[:apikey]
         raise DuplicatedAssignmentOfApiKey, "Use apikey or apikeys, not both"
       else
-        @apikey =     params[:apikeys] unless params[:apikeys].nil?
-        @apikey =     params[:apikey] unless params[:apikey].nil?
+        @apikey = params[:apikeys] || params[:apikey]
       end
     end
   
