@@ -38,6 +38,10 @@ EOF
   opts.on("-dDESCRIPTION", "--description DESCRIPTION", "Description") do |desc|
     options[:description] = desc
   end
+
+  opts.on("-aAPPLICATION", "--application APPLICATION", "Application") do |app|
+    options[:application] = app
+  end
   
   opts.on("-eEVENT", "--event EVENT", "Event") do |event|
     options[:event] = event
