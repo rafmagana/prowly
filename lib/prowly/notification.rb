@@ -43,7 +43,7 @@ module Prowly
     def params
       attributes = []
       instance_variables.each do |var|
-        raw_attr = "#{var.sub('@','')}"
+        raw_attr = "#{var.to_s.sub('@','')}"
         value = send("#{raw_attr}")
         next if value.nil?
         attributes << "#{raw_attr}=" + CGI.escape(value.to_s)
