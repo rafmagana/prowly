@@ -78,7 +78,7 @@ else
 end
 
 available_priorities = Prowly::Notification::Priority.constants
-unless available_priorities.include? options[:priority]
+unless available_priorities.map(&:to_s).include? options[:priority]
   abort("Invalid priority. Valid options are: " + available_priorities.join(", "))
 end
 
