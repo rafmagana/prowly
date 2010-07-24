@@ -67,9 +67,6 @@ Yet another Ruby interface to Prowl with command line utility
 	end
 	
 
-== Known bugs
-
-Command-line interface is not working in Ruby 1.9, it always throws "Invalid priority"
 
 == Note on Patches/Pull Requests
  
