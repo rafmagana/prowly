@@ -52,9 +52,9 @@ Yet another Ruby interface to Prowl with command line utility
 
 	if result.succeeded?
 	  result.remaining # => "977"
-	  resetdate.resetdate # => "1266272588"
+	  result.resetdate # => "1266272588"
 	else
-	  resetdate.message # => 
+	  result.message # => 
 	end
 	
 	ON ERROR
