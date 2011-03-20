@@ -30,6 +30,8 @@ Obtaining a user's API key with the prowly gem is a three step process:
 - user approves the request at a special web URL (in their browser)
 - provider gets user's API key with their provider key and the token via retrieve_apikey
 
+This is somewhat similar to the OAuth scheme.
+
   # obtain a token first with your provider key first
   provider_key = "2b33d3f3f8522aaed4b2fc44382f1519791db6a2"
   token_result = Prowly.retrieve_token(provider_key)
