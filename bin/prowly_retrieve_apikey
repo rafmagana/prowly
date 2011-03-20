@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+
+STDOUT.sync = true
+
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+require 'rubygems'
+require 'prowly'
+require 'optparse'
+
+options = {}
+
+ORIGINAL_ARGV = ARGV.dup
+
+opts = OptionParser.new do |opts|
+  opts.banner = <<-EOF
+Usage:
+    prowly_retrieve -p providerkey
+
+  Options:
+EOF
+
+  opts.on("-pPROVIDERKEY", "--provider PRIORITY", "Provider Key") do |priority|
+    options[:provider] = priority
+  end
+  
+  opts.on("-v", "--version", "Print the version number and exit") do
+    options[:version] = true
+  end  
+end
+
+opts.parse!
+
+if options[:version]
+  abort("Version " + Prowly.version)
+end
+
+token_result = Prowly.retrieve_token(options[:provider])
+
+if token_result.succeeded?
+  puts "go to this #{token_result.url} to approve this request"
+  puts "then press <ENTER> to continue "
+  dummy = STDIN.gets
+
+  apikey_result = Prowly.retrieve_apikey(options[:provider], token_result.token)
+
+  if apikey_result.succeeded?
+    puts "code returned is #{apikey_result.code}"
+    puts "status is #{apikey_result.status}"
+    exit(0)
+  else
+    puts "Error: #{apikey_result.message}"
+    exit(1)
+  end
+else
+  puts "Error: #{token_result.message}"
+  exit(1)
+end
