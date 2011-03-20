@@ -4,7 +4,7 @@ module Prowly
   
   #This is a Prowl API response wrapper
   class Response
-  
+    
     attr_writer :response
     attr_accessor :http_response
 
@@ -17,28 +17,30 @@ module Prowly
     def self.map_xml(response)
       response_info = parse_xml(response)
       
-      #define dynamic methods based on the prowl api response
-      #posible methods on success: code, remaining, resetdate
-      #posible methods on error: code
-      response_info.attributes.each do |key, value|
-        add_instance_method(key, value)
+      response_info.elements.each do |r|
+        #define dynamic methods based on the prowl api response
+        #posible methods on success: code, remaining, resetdate
+        #posible methods on error: code
+        r.attributes.each do |key, value|
+          # puts "attribute #{key}: #{value}"
+          if key == "code"
+            add_instance_method(:status, value == "200" ? "success" : "error") 
+            #define a method named status and it'll return "success" or "error"
+            boolean_status = value == "200" ? true : false
+            add_instance_method(:succeeded?, boolean_status)
+          end
+          add_instance_method(key, value)
+        end
       end
+
+      add_instance_method(:message, response_info[1].text) unless boolean_status
       
-      response_info_name = response_info.name
-      #define a method named status and it'll return "success" or "error"
-      add_instance_method(:status, response_info_name)
-    
-      boolean_status = response_info_name == "success" ? true : false
-    
-      add_instance_method(:message, response_info.text) unless boolean_status
-    
-      add_instance_method(:succeeded?, boolean_status)
       true
     end
     
     def self.parse_xml(response)
       data = REXML::Document.new response
-      data.root[1]
+      data.root
     end
     
     #define dynamic methods
