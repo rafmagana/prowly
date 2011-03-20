@@ -47,7 +47,7 @@ module Prowly
       define_method(name) { content }
     end
   
-    ## ERRORCODES are documented in http://prowl.weks.net/api.php
+    ## ERRORCODES are documented in http://www.prowlapp.com/api.php
     module ErrorCode
       BAD                   = 400 #Bad request, the parameters you provided did not validate, see ERRORMESSAGE.
       NOT_AUTHORIZED        = 401 #Not authorized, the API key given is not valid, and does not correspond to a user.
