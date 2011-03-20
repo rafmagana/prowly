@@ -33,6 +33,7 @@ Yet another Ruby interface to Prowl with command line utility
 	  -d, --description DESCRIPTION    Description
 	  -e, --event EVENT                Event
 	  -p, --priority PRIORITY          VERY_LOW, MODERATE, NORMAL (default), HIGH, EMERGENCY
+	  -u, --url                        URL for redirect (v1.2 feature)
 	  -v, --version                    Print the version number and exit
 	
 	  If you only specify the apikey prowly will use the defaults: 
@@ -41,6 +42,7 @@ Yet another Ruby interface to Prowl with command line utility
 	  :event => "Prowly notification"
 	  :application => "Prowly"
 	  :priority => NORMAL
+	  :url => nil
 		
 == Handling the Prowl API response
 	
