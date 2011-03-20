@@ -28,12 +28,11 @@ module Prowly
             #define a method named status and it'll return "success" or "error"
             boolean_status = value == "200" ? true : false
             add_instance_method(:succeeded?, boolean_status)
+            add_instance_method(:message, response_info[1].text) unless boolean_status
           end
           add_instance_method(key, value)
         end
       end
-
-      add_instance_method(:message, response_info[1].text) unless boolean_status
       
       true
     end
