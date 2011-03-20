@@ -60,7 +60,7 @@ module Prowly
   end
   
   def retrieve_apikey(providerkey, token)
-    api.call Interface::Command::RETRIEVE_APIKEY, "providerkey=#{providerkey},token=#{token}"
+    api.call Interface::Command::RETRIEVE_APIKEY, "providerkey=#{providerkey}&token=#{token}"
   end
   
   def valid_key?(key)
