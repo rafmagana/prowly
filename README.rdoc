@@ -63,9 +63,9 @@ Yet another Ruby interface to Prowl with command line utility
 
 	if result.succeeded?
 	  result.remaining # =>
-	  resetdate.resetdate # =>
+	  result.resetdate # =>
 	else
-	  resetdate.message # => "Invalid API Key(s)" <= This depends on the message sent by the prowl API
+	  result.message # => "Invalid API Key(s)" <= This depends on the message sent by the prowl API
 	end
 	
 
