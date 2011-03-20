@@ -8,6 +8,8 @@ Yet another Ruby interface to Prowl with command line utility
 
 == Usage as a Gem
 	
+Sending a notification via prowly gem
+
 	Prowly.notify do |n| # :notify is an alias of :add
 	  n.apikey = "apikey" or n.apikeys = ["apikey_1", "apikey_2", "apikey_n"]
 	  n.priority = Prowly::Notification::Priority::MODERATE
@@ -21,6 +23,24 @@ Yet another Ruby interface to Prowl with command line utility
 	notification = Prowly::Notification.new(:apikeys => ["apikey_1", "apikey_2", "apikey_n"], :application => "Prowly", :description => "Testing...")
 	
 	result = Prowly.notify(notification)
+
+Obtaining a users APIKEY with the prowly gem is a three step process: provider gets a token with their provider key, user approves the request at a special web URL and then provider gets user's API key with their provider key and the token.
+
+  # obtain a token first with your provider key first
+  provider_key = "2b33d3f3f8522aaed4b2fc44382f1519791db6a2"
+  token_result = Prowly.retrieve_token(provider_key)
+  if token_result.succeeded?
+    # if the call succeeded, the user will need to approve the request in their browser
+    puts "go to this #{token_result.url} to approve this request"
+    puts "then press <ENTER> to continue "
+    dummy = STDIN.gets
+
+    apikey_result = Prowly.retrieve_apikey(options[:provider], token_result.token)
+
+    if apikey_result.succeeded?
+      puts "The user apikey is #{apikey_result.apikey}"
+    end
+  end
 
 == Usage in the command line
 	
@@ -83,5 +103,7 @@ Yet another Ruby interface to Prowl with command line utility
 
 == Copyright
 
-Copyright (c) 2010 Rafael Magaña. See LICENSE for details.
-Updated for Prowl API version 1.2 by Ken Pepple
+Copyright (c) 2010 Rafael Magaña
+Copyright (c) 2010 Ken Pepple, additions for Prowl API version 1.2
+
+See LICENSE for details
