@@ -84,3 +84,4 @@ Yet another Ruby interface to Prowl with command line utility
 == Copyright
 
 Copyright (c) 2010 Rafael Magaña. See LICENSE for details.
+Updated for Prowl API version 1.2 by Ken Pepple

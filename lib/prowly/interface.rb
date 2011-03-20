@@ -42,7 +42,7 @@ module Prowly
     include Singleton
     
     def initialize
-      @url = "https://prowl.weks.net/publicapi"
+      @url = "https://api.prowlapp.com/publicapi"
     end
     
     ## Make the actual call to the prowl api
