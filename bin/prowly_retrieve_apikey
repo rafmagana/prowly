@@ -45,8 +45,7 @@ if token_result.succeeded?
   apikey_result = Prowly.retrieve_apikey(options[:provider], token_result.token)
 
   if apikey_result.succeeded?
-    puts "code returned is #{apikey_result.code}"
-    puts "status is #{apikey_result.status}"
+    puts "The user apikey is #{apikey_result.apikey}"
     exit(0)
   else
     puts "Error: #{apikey_result.message}"

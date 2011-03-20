@@ -84,5 +84,20 @@ EOF
     assert_equal(true, rt.succeeded?)
   end
 
+  def test_good_retrieve_apikey_response
+    xml_response =
+<<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<prowl>
+	<success code="200" remaining="999" resetdate="1300659778" />
+	<retrieve apikey="15c501d2e65cfd46316513da47355283db4652fc" />
+</prowl>
+EOF
+    full_http_response = "200"
+    rt = Prowly::Response.new(xml_response, full_http_response)
+    assert_equal(rt.code, "200")
+    assert_equal(true, rt.succeeded?)
+    assert_equal("15c501d2e65cfd46316513da47355283db4652fc", rt.apikey)
+  end
 
 end
