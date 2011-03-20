@@ -14,6 +14,7 @@ Yet another Ruby interface to Prowl with command line utility
 	  n.application = "Prowly"
 	  n.event = "Notification"
 	  n.description = "Your server is under attack!!!"
+	  n.url = "http://www.myserver.com"
 	end
 	
 	notification = Prowly::Notification.new(:apikey => "apikey", :application => "Prowly", :description => "Testing...")
