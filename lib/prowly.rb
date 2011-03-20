@@ -1,5 +1,6 @@
 #--
 # Copyright (c) 2010 Rafael Magaña Ávalos
+# Copyright (c) 2011 Ken Pepple
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -52,6 +53,14 @@ module Prowly
 
   def verify(apikey)
     api.call Interface::Command::VERIFY, "apikey=#{apikey}"
+  end
+
+  def retrieve_token(providerkey)
+    api.call Interface::Command::RETRIEVE_TOKEN, "providerkey=#{providerkey}"
+  end
+  
+  def retrieve_apikey(providerkey, token)
+    api.call Interface::Command::RETRIEVE_APIKEY, "providerkey=#{providerkey},token=#{token}"
   end
   
   def valid_key?(key)

@@ -15,7 +15,8 @@ options = {
             :description => "I am testing Prowly, and it works!", 
             :event => "Prowly notification", 
             :application => "Prowly", 
-            :priority => "NORMAL"}
+            :priority => "NORMAL",
+            :url => nil}
 
 
 opts = OptionParser.new do |opts|
@@ -49,6 +50,10 @@ EOF
   
   opts.on("-pPRIORITY", "--priority PRIORITY", "VERY_LOW, MODERATE, NORMAL (default), HIGH, EMERGENCY") do |priority|
     options[:priority] = priority
+  end
+  
+  opts.on("-uURL", "--url URL", "URL") do |url|
+    options[:url] = url
   end
   
   opts.on("-v", "--version", "Print the version number and exit") do
@@ -88,6 +93,7 @@ result = Prowly.notify do |n|
   n.application = options[:application]
   n.event       = options[:event]
   n.description = options[:description]
+  n.url         = options[:url]
 end
 
 if result.succeeded?

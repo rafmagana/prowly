@@ -58,7 +58,7 @@ module Prowly
     ## EXCEPTIONS
     class PriorityNotAvailable < RuntimeError; end
   
-    attr_accessor :providerkey, :priority, :event
+    attr_accessor :providerkey, :priority, :event, :url
   
     def initialize(params = {})
       @apikey       = (params[:apikey] || params[:apikeys]) || "fffffffffffffffffffffffffffffffffffffffff"
@@ -66,6 +66,7 @@ module Prowly
       @event        = params[:event]        || "Prowly is working!!"
       @description  = params[:description]   || "This is the default description"
       @priority     = params[:priority]     || Priority::NORMAL
+      @url          = params[:url]          || nil
       super
     end
     

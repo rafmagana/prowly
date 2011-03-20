@@ -1,5 +1,6 @@
 #--
 # Copyright (c) 2010 Rafael Magaña Ávalos
+# Copyright (c) 2011 Ken Pepple
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -68,6 +69,8 @@ module Prowly
     module Command
       ADD     = "add"
       VERIFY  = "verify"
+      RETRIEVE_TOKEN = "retrieve/token"
+      RETRIEVE_APIKEY = "retrieve/apikey"
     end
     
     ## EXCEPTIONS
