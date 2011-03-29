@@ -10,9 +10,7 @@ begin
     gem.description = "The Prowly gem is a simple wrapper to the Prowl API, you can use it to send messages to your iPhone in a Rails or pure Ruby application."
     gem.email = "raf.magana@gmail.com"
     gem.homepage = "http://github.com/rafmagana/prowly"
-    gem.authors = ["Rafael Magaña"]
-    # gem.add_development_dependency "shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.authors = ["Rafael Magana"]
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
