@@ -10,6 +10,7 @@ Yet another Ruby interface to Prowl with command line utility
 	
 Sending a notification via prowly gem
 
+```ruby
 	Prowly.notify do |n| # :notify is an alias of :add
 	  n.apikey = "apikey" or n.apikeys = ["apikey_1", "apikey_2", "apikey_n"]
 	  n.priority = Prowly::Notification::Priority::MODERATE
@@ -23,6 +24,7 @@ Sending a notification via prowly gem
 	notification = Prowly::Notification.new(:apikeys => ["apikey_1", "apikey_2", "apikey_n"], :application => "Prowly", :description => "Testing...")
 	
 	result = Prowly.notify(notification)
+```
 
 Obtaining a user's API key with the prowly gem is a three step process:
 
@@ -32,6 +34,7 @@ Obtaining a user's API key with the prowly gem is a three step process:
 
 This is somewhat similar to the OAuth scheme.
 
+```
   # obtain a token first with your provider key first
   provider_key = "2b33d3f3f8522aaed4b2fc44382f1519791db6a2"
   token_result = Prowly.retrieve_token(provider_key)
@@ -47,9 +50,11 @@ This is somewhat similar to the OAuth scheme.
       puts "The user apikey is #{apikey_result.apikey}"
     end
   end
+```
 
 == Usage in the command line
-	
+
+```bash	
 	$prowly -h # help
 		
 	$prowly -k one_apikey -a "the application" -e "the event" -d "the description" -p NORMAL
@@ -70,8 +75,11 @@ This is somewhat similar to the OAuth scheme.
 	  :application => "Prowly"
 	  :priority => NORMAL
 	  :url => nil
+```
 
 == Handling the Prowl API response
+
+```ruby
 	
 	ON SUCCESS
 	result.status # => "success"
@@ -94,6 +102,7 @@ This is somewhat similar to the OAuth scheme.
 	else
 	  result.message # => "Invalid API Key(s)" <= This depends on the message sent by the prowl API
 	end
+```
 
 == Note on Patches/Pull Requests
  
